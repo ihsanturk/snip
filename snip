@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# snippets
+
+ph=XXX
+
+lang=shell
+while getopts :l: args; do case $args in
+	(l) lang="$OPTARG" ;;
+	(*) ;;
+esac; done
+
+while read -r key; do
+	case $lang in
+
+
+		(shell)
+			case $key in
+
+				(init)
+					printf "#!/bin/sh\n\ntitle='%s'\nusgmsg='%s'\n\n" $ph $ph;;
+
+				(stdin)
+					printf 'while read -r line; do\n\techo "$line";\ndone;';;
+
+				(*) ;;
+			esac
+		;;
+
+
+		(python)
+		;;
+
+
+		(*)
+		;;
+
+	esac
+done
