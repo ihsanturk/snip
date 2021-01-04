@@ -11,50 +11,61 @@ while getopts :l: args; do case $args in
 esac; done
 
 while read -r key; do
-	case $lang in
+case $lang in
 
 
-		(shell)
-			case $key in
+	(shell)
+	case $key in
 
-				(init)
-					printf "#!/bin/sh\n\ntitle='%s'\nusgmsg='%s'\n\n" $ph $ph;;
+		(init)
+			printf "#!/bin/sh\n\ntitle='%s'\nusgmsg='%s'\n\n" $ph $ph;;
 
-				(stdin)
-					printf 'while read -r line; do\n\techo "$line";\ndone;\n';;
+		(stdin)
+			printf 'while read -r line; do\n\techo "$line";\ndone;\n';;
 
-				(*) ;;
-			esac
-		;;
-
-
-		(c)
-			case $key in
-				(init)
-					printf "#include <stdio.h>\n\nint main(int argc, char** argv) {\n\n\tprintf(\"%s\");\n\n\treturn 0;\n\n}\n" "$ph";; esac
-		;;
-
-
-		(cc|c++|cpp)
-			case $key in
-				(init)
-					printf "#include <iostream>\n\nint main(int argc, char** argv) {\n\n\tstd::cout << \"%s\" << std::endl;\n\n\treturn 0;\n\n}\n" "$ph";; esac
-		;;
-
-
-		(make)
-			case $key in
-				(init)
-					print "default:\n\tcc main.c\n";;
-			esac
-		;;
-
-		(python)
-		;;
-
-
-		(*)
-		;;
-
+		(*) ;;
 	esac
+	;;
+
+
+	(c)
+	case $key in
+
+		(init)
+			printf "#include <stdio.h>\n\nint main(int argc, char** argv) {\n\n\tprintf(\"%s\");\n\n\treturn 0;\n\n}\n" "$ph";;
+
+		(*) ;;
+	esac
+	;;
+
+
+	(cc|c++|cpp)
+	case $key in
+
+		(init)
+			printf "#include <iostream>\n\nint main(int argc, char** argv) {\n\n\tstd::cout << \"%s\" << std::endl;\n\n\treturn 0;\n\n}\n" "$ph";;
+
+		(*) ;;
+	esac
+	;;
+
+
+	(make)
+	case $key in
+
+		(init)
+			print "default:\n\tcc main.c\n";;
+
+	(*) ;;
+	esac
+	;;
+
+	(python)
+	;;
+
+
+	(*)
+	;;
+
+esac
 done
