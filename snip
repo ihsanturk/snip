@@ -54,7 +54,7 @@ case $lang in
 	case $key in
 
 		(init)
-			print "default:\n\tcc main.c\n";;
+			printf "default:\n\tcc -o main main.c\n";;
 
 	(*) ;;
 	esac
