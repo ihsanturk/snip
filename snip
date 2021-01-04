@@ -21,7 +21,7 @@ while read -r key; do
 					printf "#!/bin/sh\n\ntitle='%s'\nusgmsg='%s'\n\n" $ph $ph;;
 
 				(stdin)
-					printf 'while read -r line; do\n\techo "$line";\ndone;';;
+					printf 'while read -r line; do\n\techo "$line";\ndone;\n';;
 
 				(*) ;;
 			esac
@@ -41,6 +41,13 @@ while read -r key; do
 					printf "#include <iostream>\n\nint main(int argc, char** argv) {\n\n\tstd::cout << \"%s\" << std::endl;\n\n\treturn 0;\n\n}\n" "$ph";; esac
 		;;
 
+
+		(make)
+			case $key in
+				(init)
+					print "default:\n\tcc main.c\n";;
+			esac
+		;;
 
 		(python)
 		;;
