@@ -13,10 +13,32 @@ esac; done
 while read -r key; do
 case $lang in
 
+	(html)
+	case $key in
+		(main|init)
+			printf '<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>%s</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<header><h1>%s</h1></header>
+	<p>%s</p>
+
+</body>
+</html>
+' $ph $ph $ph
+	esac
+	;;
+
 	(rust|rs) # --------------------------------------------------------------
 	case $key in
 
-		(main)
+		(main|init)
 			printf 'fn main() {\n\n\tprintln!("%s");\n\n}' $ph;;
 
 		(*) ;;
@@ -31,7 +53,7 @@ case $lang in
 
 # deps: usage
 
-title='%s'; desc='%s'
+title='\"\$(basename \"\$0\")\"'; desc='%s'
 args='-h'
 # opts='-h   show this help screen'
 usg() { usage \"\$title - \$desc\" \"\$title \$args\" \"\$opts\"; }
