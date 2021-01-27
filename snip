@@ -53,9 +53,9 @@ case $lang in
 
 # deps: usage
 
-title='\"\$(basename \"\$0\")\"'; desc='%s'
+title=\"\$(basename \"\$0\")\"; desc='SCRIPT DESCRIPTION'
 args='-h'
-# opts='-h   show this help screen'
+opts='-h   show this help screen'
 usg() { usage \"\$title - \$desc\" \"\$title \$args\" \"\$opts\"; }
 
 while getopts :h args; do case \$args in
@@ -63,7 +63,7 @@ while getopts :h args; do case \$args in
 	([?]) usg; exit 2 ;;
 esac; done
 
-" $ph $ph;;
+" $ph;;
 
 		(stdin)
 			printf 'while read -r line; do\n\techo "$line";\ndone;\n';;
