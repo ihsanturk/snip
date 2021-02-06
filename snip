@@ -48,6 +48,13 @@ case $lang in
 	(shell|sh) # -------------------------------------------------------------
 	case $key in
 
+		(case)
+			printf "case \$key in
+	(hello) printf 'hello';;
+	(*) printf 'default';;
+esac
+";;
+
 		(init)
 			printf "#!/bin/sh
 
