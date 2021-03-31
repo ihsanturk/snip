@@ -48,29 +48,40 @@ case $lang in
 	(shell|sh) # -------------------------------------------------------------
 	case $key in
 
-		(case)
+		(u|us|usg|usage)
+			printf "#!/bin/sh
+
+usage() {
+	commandline='commandline <usage> --like --this'
+	>&2 printf \"usage:\\\n\\\t\\\033[33m\$commandline\\\033[0m\\\n\";
+}
+
+case \$1 in
+	(-h|--help) usage; exit 0;;
+	(*) usage; exit 1;;
+esac
+";;
+
+		(c|ca|cas|case)
 			printf "case \$key in
 	(hello) printf 'hello';;
 	(*) printf 'default';;
 esac
 ";;
 
-		(init)
+		(i|in|ini|init)
 			printf "#!/bin/sh
 
-# deps: usage
+usage() {
+	commandline='commandline <usage> --like --this'
+	>&2 printf \"usage:\\\n\\\t\\\033[33m\$commandline\\\033[0m\\\n\";
+}
 
-title=\"\$(basename \"\$0\")\"; desc='SCRIPT DESCRIPTION'
-args='-h'
-opts='-h   show this help screen'
-usg() { usage \"\$title - \$desc\" \"\$title \$args\" \"\$opts\"; }
-
-while getopts :h args; do case \$args in
-	(h) usg; exit 0 ;;
-	([?]) usg; exit 2 ;;
-esac; done
-
-" $ph;;
+case \$1 in
+	(-h|--help) usage; exit 0;;
+	(*) usage; exit 1;;
+esac
+";;
 
 		(stdin)
 			printf 'while read -r line; do\n\techo "$line";\ndone;\n';;
@@ -115,7 +126,7 @@ esac; done
 	(python|py) # ------------------------------------------------------------
 	case $key in
 
-		(main)
+		(main|init)
 			printf "if __name__ == '__main__':\n\n\tprint('%s')\n\n" $ph;;
 
 		(nixinit)
