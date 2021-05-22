@@ -105,7 +105,7 @@ esac
 	case $key in
 
 		(init)
-			printf "#include <stdio.h>\n\nint main(int argc, char** argv) {\n\n\tprintf(\"%s\");\n\n\treturn 0;\n\n}\n" "$ph";;
+			printf "#include <stdio.h>\n\nint\nmain(int argc, char** argv)\n{\n\treturn 0;\n}\n";;
 
 		(*) ;;
 	esac
