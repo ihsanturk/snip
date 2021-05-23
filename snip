@@ -39,7 +39,7 @@ case $lang in
 	case $key in
 
 		(init)
-			echo "---\ndate: $(date +%Y-%m-%dT%H:%M)\n---\n\n# ";;
+			printf -- "---\ndate: $(date +%Y-%m-%dT%H:%M)\n---\n\n# ";;
 
 		(*) ;;
 	esac
