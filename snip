@@ -58,12 +58,21 @@ case $lang in
 	(shell|sh) # -------------------------------------------------------------
 	case $key in
 
+		(f|fi|fil|file*)
+			printf "if [ -n \"\$1\" ]; then
+	echo \"\$@\"
+else
+	while read -r filename; do
+		echo \"\$filename\"
+	done
+fi";;
+
 		(u|us|usg|usage)
 			printf "#!/bin/sh
 
 usage() {
-	commandline='commandline <usage> --like --this'
-	>&2 printf \"usage:\\\n\\\t\\\033[33m\$commandline\\\033[0m\\\n\";
+	commandline=\"\$(basename \"\$0\") [ FILE(S) (or from stdin) ]\"
+	>&2 printf \"usage:\\\n\\\t\\\033[33m%%s\\\033[0m\\\n\" \"\$commandline\";
 }
 
 case \$1 in
