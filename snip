@@ -125,7 +125,7 @@ esac
 	case $key in
 
 		(init)
-			printf "#include <iostream>\n\nint main(int argc, char** argv) {\n\n\tstd::cout << \"%s\" << std::endl;\n\n\treturn 0;\n\n}\n" "$ph";;
+			printf "#include <iostream>\n\nint\nmain(int argc, char** argv)\n{\n\n\tstd::cout << \"%s\" << std::endl;\n\n\treturn 0;\n\n}\n" "$ph";;
 
 		(*) ;;
 	esac
