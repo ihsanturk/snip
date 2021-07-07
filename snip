@@ -113,6 +113,16 @@ esac
 	(c) # --------------------------------------------------------------------
 	case $key in
 
+		(stdin|input|read)
+			printf '
+	#include <string.h>
+
+	char line[20000]; // 20kb
+	while (fgets(line, sizeof(line), stdin)) {
+		strtok(line, "\\n");
+		printf("[%%s]\\n", line);
+	}';;
+
 		(init)
 			printf "#include <stdio.h>\n\nint\nmain(int argc, char** argv)\n{\n\treturn 0;\n}\n";;
 
@@ -123,6 +133,9 @@ esac
 
 	(cc|c++|cpp) # -----------------------------------------------------------
 	case $key in
+
+		(cout)
+			printf "\tstd::cout\n\t\t<< HELLO\n\t\t<< std::endl;\n";;
 
 		(init)
 			printf "#include <iostream>\n\nint\nmain(int argc, char** argv)\n{\n\n\tstd::cout << \"%s\" << std::endl;\n\n\treturn 0;\n\n}\n" "$ph";;
