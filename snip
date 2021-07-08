@@ -148,6 +148,21 @@ esac
 	(make|mk) # --------------------------------------------------------------
 	case $key in
 
+		(all|each|everything|sources)
+			printf 'SRC=$(wildcard *.c)
+BIN=$(SRC:.c=)
+
+all: $(BIN)
+
+install:
+	mkdir -p /usr/local/bin/
+	cp ${BIN} /usr/local/bin/
+
+uninstall:
+	printf "\\\\033[33mmanually remove these from /usr/local/bin\\\\033[0m\\n"
+	printf "\\\\033[33m${BIN}\\\\033[0m\\n" | sed "s/ /,/g"
+';;
+
 		(init)
 			printf "default:\n\tcc -o main main.c\n";;
 
