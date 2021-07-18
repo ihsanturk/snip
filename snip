@@ -174,7 +174,7 @@ uninstall:
 	case $key in
 
 		(main|init)
-			printf "if __name__ == '__main__':\n\n\tprint('%s')\n\n" $ph;;
+			printf "if __name__ == '__main__':\n\n    print('%s')\n\n" $ph;;
 
 		(nixinit)
 			printf "#!/usr/bin/env nix-shell\n#!nix-shell -i python3 -p python38Packages.%s python38Packages.%s\n# vim:set ft=python:\n\n" "$ph" "$ph";;
